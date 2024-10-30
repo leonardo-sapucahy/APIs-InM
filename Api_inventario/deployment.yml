@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata: 
+  name: mp_leo-deployment-inventario
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels: 
+      app: mp_leo-deployment-inventario
+  template: 
+    metadata: 
+      labels: 
+        app: mp_leo-deployment-inventario
+    spec:
+      containers:
+      - name: mp_leo-deployment-inventario
+        imagem: marcospffernandes/api-inventario
+        resources: 
+          limits: 
+            memory: "128Mi"
+            cpu: "250m"
+        ports: 
+          - containerPort: 5001
+        envFrom:
+          - configMapRef:
+            name: mp_leo-configmap 
+
